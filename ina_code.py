@@ -28,18 +28,23 @@ def get_article_id(df:pd.DataFrame, ids:pd.Series) -> pd.DataFrame:
     df['article_id'] = ["0" + str(id) for id in ids]
     return df
 
-# EDA
-# articles
-
-# number of product
 
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-def val_cnt(df:pd.DataFrame, col=str, top_n:int):
-    data = df[col][:10]
-    print(data)
-    order = df[col].value_counts().sort_values(ascending=False).index
-    print(order)
-    viz = sns.countplot(data=df, x=data, order=order)
-    return viz
+
+def val_cnt(df: pd.DataFrame, col: str, top_n: int):
+    sns.set(style='whitegrid')
+    _order = df[col].value_counts()[:top_n].index
+    viz = sns.countplot(x=col,
+                        data=df,
+                        order=_order)
+    plt.xticks(rotation=45)
+
+    plt.show()
+
+# total number of unique value of each column
+
+def total_unique_num(df:pd.DataFrame, col:str) -> pd.Series:
+    res = df[col].value_counts()
+    return res
