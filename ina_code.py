@@ -48,3 +48,11 @@ def val_cnt(df: pd.DataFrame, col: str, top_n: int):
 def total_unique_num(df:pd.DataFrame, col:str) -> pd.Series:
     res = df[col].value_counts()
     return res
+
+# customers
+
+customers = create_df(customers)
+customers = customers.dropna(subset = ['age'])
+customers['age'] = customers['age'].astype(int)
+customers['fashion_news_frequency'] = customers['fashion_news_frequency'].fillna('None')
+customers['fashion_news_frequency'] = customers['fashion_news_frequency'].replace('NONE', 'None')
